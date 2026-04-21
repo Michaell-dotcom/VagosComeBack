@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LSV · Markus · Leader Bewerbung</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Figtree:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --y:#f0b429;
+  --y2:#ffe066;
+  --o:#c47d0e;
+  --bg:#080706;
+  --bg2:#100f0d;
+  --card:#131210;
+  --border:rgba(240,180,41,0.1);
+  --txt:#b8a570;
+  --muted:#5a4e2e;
+  --w:#f5f0e8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--txt);
+  font-family:'Figtree',sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+}
+
+/* ══ HERO ══ */
+.hero{
+  min-height:100vh;
+  display:grid;
+  grid-template-rows:1fr auto;
+  position:relative;
+  overflow:hidden;
+  background:var(--bg);
+}
+
+.hero-top{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:calc(100vh - 120px);
+}
+
+/* linke hälfte */
+.hero-l{
+  background:var(--y);
+  padding:60px 50px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  position:relative;
+  overflow:hidden;
+}
+.hero-l::after{
+  content:'';
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    -45deg,transparent,transparent 12px,
+    rgba(0,0,0,0.03) 12px,rgba(0,0,0,0.03) 13px
+  );
+  pointer-events:none;
+}
+.hero-l-top{position:relative;z-index:1;}
+.hero-l-tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.6rem;letter-spacing:.25em;
+  text-transform:uppercase;
+  color:rgba(0,0,0,0.4);
+  margin-bottom:20px;display:block;
+}
+.hero-l-gang{
+  font-family:'Unbounded',sans-serif;
+  font-size:clamp(2rem,5vw,4rem);
+  font-weight:900;
+  color:#000;
+  line-height:.9;
+  letter-spacing:-.03em;
+}
+.hero-l-gang span{
+  display:block;color:#7a3d00;
+  font-size:.55em;margin-top:6px;
+}
+.hero-l-bottom{position:relative;z-index:1;}
+.hero-l-name{
+  font-family:'Unbounded',sans-serif;
+  font-size:clamp(1rem,2.5vw,1.8rem);
+  font-weight:700;color:#000;
+  letter-spacing:-.02em;margin-bottom:4px;
+}
+.hero-l-role{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;letter-spacing:.2em;
+  text-transform:uppercase;
+  color:rgba(0,0,0,0.45);
+}
+
+/* rechte hälfte */
+.hero-r{
+  background:var(--bg2);
+  padding:60px 50px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  position:relative;
+  border-left:1px solid var(--border);
+}
+.hero-r::before{
+  content:'LSV';
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  font-family:'Unbounded',sans-serif;
+  font-size:14rem;font-weight:900;
+  color:rgba(240,180,41,0.03);
+  letter-spacing:-.05em;
+  pointer-events:none;line-height:1;
+  white-space:nowrap;
+}
+.hero-r-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.58rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--o);
+  margin-bottom:12px;display:block;
+}
+.hero-r-title{
+  font-family:'Unbounded',sans-serif;
+  font-size:clamp(2.5rem,6vw,5.5rem);
+  font-weight:900;
+  color:var(--w);
+  line-height:.88;
+  letter-spacing:-.03em;
+}
+.hero-r-title em{
+  font-style:normal;
+  color:var(--y);display:block;
+}
+
+/* info bar unten */
+.hero-bar{
+  background:#000;
+  border-top:1px solid rgba(240,180,41,0.15);
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+}
+.hb-item{
+  padding:20px 24px;
+  border-right:1px solid rgba(240,180,41,0.08);
+}
+.hb-item:last-child{border-right:none;}
+.hb-key{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.52rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);
+  margin-bottom:5px;
+}
+.hb-val{
+  font-family:'Unbounded',sans-serif;
+  font-size:.85rem;font-weight:700;
+  color:var(--w);letter-spacing:-.01em;
+}
+
+/* ══ NAV ══ */
+nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(8,7,6,0.9);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;
+  padding:0 40px;overflow-x:auto;
+}
+.nav-logo{
+  font-family:'Unbounded',sans-serif;
+  font-size:.9rem;font-weight:900;
+  color:var(--y);letter-spacing:.02em;
+  margin-right:28px;flex-shrink:0;
+}
+nav a{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.58rem;letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--muted);text-decoration:none;
+  padding:18px 14px;white-space:nowrap;
+  border-bottom:2px solid transparent;
+  transition:all .2s;
+}
+nav a:hover{color:var(--y);border-bottom-color:var(--y);}
+
+/* ══ PAGE ══ */
+.pg{max-width:860px;margin:0 auto;padding:0 40px 80px;}
+
+/* ══ SECTION ══ */
+.sec{
+  padding:80px 0 0;
+  opacity:0;transform:translateY(18px);
+  transition:opacity .55s,transform .55s;
+}
+.sec.visible{opacity:1;transform:none;}
+
+.sh{
+  display:flex;align-items:center;gap:16px;
+  margin-bottom:36px;
+}
+.sh-num{
+  font-family:'Unbounded',sans-serif;
+  font-size:.65rem;font-weight:700;
+  color:var(--y);letter-spacing:.05em;
+  flex-shrink:0;
+}
+.sh-title{
+  font-family:'Unbounded',sans-serif;
+  font-size:clamp(1.3rem,3vw,2rem);
+  font-weight:900;color:var(--w);
+  letter-spacing:-.02em;line-height:1.1;
+}
+.sh-rule{flex:1;height:1px;background:var(--border);}
+
+/* ══ PROFIL ══ */
+.profil{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
+.pi{
+  background:var(--card);padding:16px 20px;
+  transition:background .15s;
+}
+.pi:hover{background:rgba(240,180,41,0.04);}
+.pi-k{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.55rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:4px;
+}
+.pi-v{
+  font-family:'Unbounded',sans-serif;
+  font-size:.88rem;font-weight:700;
+  color:var(--w);letter-spacing:-.01em;
+}
+
+/* ══ FLIESSTEXT ══ */
+.ft{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-left:3px solid var(--y);
+  padding:22px 26px;
+  font-size:.88rem;line-height:1.95;
+  color:var(--txt);
+}
+
+/* ══ BULLET LISTE ══ */
+.blist{display:flex;flex-direction:column;gap:1px;}
+.bli{
+  display:flex;gap:0;
+  background:var(--card);
+  border:1px solid var(--border);
+  overflow:hidden;
+  transition:border-color .15s;
+}
+.bli:hover{border-color:rgba(240,180,41,0.22);}
+.bli-n{
+  font-family:'Unbounded',sans-serif;
+  font-size:.75rem;font-weight:900;
+  background:rgba(240,180,41,0.07);
+  color:var(--y);
+  padding:18px 16px;
+  display:flex;align-items:center;justify-content:center;
+  min-width:54px;flex-shrink:0;
+  border-right:1px solid var(--border);
+}
+.bli-body{padding:16px 20px;}
+.bli-t{
+  font-family:'Unbounded',sans-serif;
+  font-size:.78rem;font-weight:700;
+  color:var(--w);margin-bottom:5px;
+  letter-spacing:-.01em;
+}
+.bli-p{font-size:.82rem;line-height:1.75;color:var(--txt);}
+
+/* ══ RANG GRID ══ */
+/* Kategorie header */
+.rang-cat{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.58rem;letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--y);
+  padding:12px 0 6px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:1px;
+  margin-top:16px;
+}
+.rang-cat:first-child{margin-top:0;}
+
+.rang-list{display:flex;flex-direction:column;gap:1px;}
+.ri{
+  display:flex;align-items:stretch;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-left:3px solid transparent;
+  overflow:hidden;transition:all .15s;
+}
+.ri:hover{border-left-color:var(--y);background:rgba(240,180,41,0.03);}
+.ri.top{border-left-color:var(--y);background:rgba(240,180,41,0.04);}
+.ri.rot{border-left-color:#c0392b;background:rgba(192,57,43,0.04);}
+.ri-n{
+  font-family:'Unbounded',sans-serif;
+  font-size:1rem;font-weight:900;
+  color:rgba(240,180,41,0.12);
+  width:46px;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;border-right:1px solid var(--border);
+  padding:12px 0;
+}
+.ri.top .ri-n{color:var(--y);}
+.ri.rot .ri-n{color:#c0392b;}
+.ri-body{padding:11px 16px;display:flex;flex-direction:column;gap:2px;}
+.ri-name{
+  font-family:'Unbounded',sans-serif;
+  font-size:.78rem;font-weight:700;
+  color:var(--w);letter-spacing:-.01em;
+}
+.ri.rot .ri-name{color:#c0392b;}
+.ri-desc{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.58rem;letter-spacing:.08em;
+  color:var(--muted);text-transform:uppercase;
+}
+
+/* ══ KRITERIEN ══ */
+.krit{display:flex;flex-direction:column;gap:1px;}
+.ki{
+  display:flex;gap:0;
+  background:var(--card);border:1px solid var(--border);
+  overflow:hidden;transition:border-color .15s;
+}
+.ki:hover{border-color:rgba(240,180,41,0.2);}
+.ki-icon{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.58rem;letter-spacing:.12em;
+  background:rgba(240,180,41,0.05);
+  color:var(--y);
+  padding:14px 16px;
+  display:flex;align-items:center;
+  border-right:1px solid var(--border);
+  flex-shrink:0;text-transform:uppercase;
+}
+.ki-txt{
+  padding:13px 18px;
+  font-size:.84rem;line-height:1.65;
+  color:var(--txt);display:flex;align-items:center;
+}
+
+/* ══ LEITFADEN ══ */
+.lf-intro{
+  background:var(--y);
+  padding:20px 24px;
+  margin-bottom:2px;
+}
+.lf-intro p{
+  font-family:'Figtree',sans-serif;
+  font-size:.88rem;line-height:1.7;
+  color:#000;font-weight:500;
+}
+
+.qa-list{display:flex;flex-direction:column;gap:2px;}
+.qa{
+  background:var(--card);
+  border:1px solid var(--border);
+  overflow:hidden;
+  transition:border-color .15s;
+}
+.qa:hover{border-color:rgba(240,180,41,0.2);}
+.qa-q{
+  padding:16px 20px;
+  font-family:'Figtree',sans-serif;
+  font-size:.85rem;font-weight:600;
+  color:var(--w);
+  border-bottom:1px solid var(--border);
+  display:flex;gap:12px;align-items:flex-start;
+}
+.qa-q-icon{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.6rem;color:var(--y);
+  background:rgba(240,180,41,0.1);
+  padding:3px 8px;flex-shrink:0;margin-top:1px;
+  letter-spacing:.05em;
+}
+.qa-a{
+  padding:14px 20px 14px 52px;
+  font-size:.82rem;line-height:1.75;
+  color:var(--txt);
+}
+.qa-a strong{color:var(--y);}
+
+/* FZ/BS Grid */
+.fzbsGrid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:2px;margin-top:4px;
+}
+.fzbsCard{
+  background:rgba(240,180,41,0.04);
+  border:1px solid var(--border);
+  padding:16px 18px;
+}
+.fzbsCard h4{
+  font-family:'Unbounded',sans-serif;
+  font-size:.72rem;font-weight:700;
+  color:var(--y);margin-bottom:10px;
+  letter-spacing:-.01em;
+}
+.fzbsCard ul{
+  list-style:none;
+  display:flex;flex-direction:column;gap:5px;
+}
+.fzbsCard ul li{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;color:var(--txt);
+  display:flex;align-items:center;gap:8px;
+}
+.fzbsCard ul li::before{
+  content:'✗';color:#c0392b;flex-shrink:0;
+}
+
+/* Info Box */
+.info-box{
+  background:rgba(240,180,41,0.06);
+  border:1px solid rgba(240,180,41,0.2);
+  padding:16px 20px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;line-height:1.8;
+  color:var(--y);letter-spacing:.04em;
+  margin-top:2px;
+}
+
+/* pass threshold */
+.pass-bar{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-left:3px solid #27ae60;
+  padding:18px 22px;
+  margin-top:2px;
+  font-size:.85rem;color:var(--txt);
+  display:flex;align-items:center;gap:14px;
+}
+.pass-pct{
+  font-family:'Unbounded',sans-serif;
+  font-size:1.4rem;font-weight:900;
+  color:#27ae60;flex-shrink:0;
+}
+
+/* ══ FOOTER ══ */
+footer{
+  border-top:1px solid var(--border);
+  padding:50px 40px;
+  max-width:860px;margin:0 auto;
+  display:flex;align-items:flex-end;
+  justify-content:space-between;gap:30px;flex-wrap:wrap;
+}
+.ft-gang{
+  font-family:'Unbounded',sans-serif;
+  font-size:clamp(1.8rem,4vw,3rem);
+  font-weight:900;color:var(--w);
+  letter-spacing:-.03em;line-height:.88;
+}
+.ft-gang span{color:var(--y);}
+.ft-meta{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.6rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--muted);
+  line-height:2.2;text-align:right;
+}
+
+/* ══ ANIM ══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--y)}
+
+@media(max-width:720px){
+  .hero-top{grid-template-columns:1fr;}
+  .hero-r{display:none;}
+  .hero-bar{grid-template-columns:1fr 1fr;}
+  .profil{grid-template-columns:1fr;}
+  .fzbsGrid{grid-template-columns:1fr;}
+  nav{padding:0 16px;}
+  .pg{padding:0 20px 60px;}
+  footer{padding:40px 20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="hero-top">
+    <div class="hero-l">
+      <div class="hero-l-top">
+        <span class="hero-l-tag">// Grand RP · Bewerbung 2026</span>
+        <div class="hero-l-gang">
+          LOS<br>SANTOS<br><span>VAGOS</span>
+        </div>
+      </div>
+      <div class="hero-l-bottom">
+        <div class="hero-l-name">Markus</div>
+        <div class="hero-l-role">Bewerber · El Patron</div>
+      </div>
+    </div>
+    <div class="hero-r">
+      <span class="hero-r-label">Bewerbung als</span>
+      <div class="hero-r-title">
+        LEADER<br><em>der Gang</em>
+      </div>
+    </div>
+  </div>
+  <div class="hero-bar">
+    <div class="hb-item"><div class="hb-key">OOC Name</div><div class="hb-val">Markus</div></div>
+    <div class="hb-item"><div class="hb-key">Alter</div><div class="hb-val">16</div></div>
+    <div class="hb-item"><div class="hb-key">Discord</div><div class="hb-val">Ryxma69</div></div>
+    <div class="hb-item"><div class="hb-key">IC Name</div><div class="hb-val">Simon Benko</div></div>
+    <div class="hb-item"><div class="hb-key">ID</div><div class="hb-val">#279054</div></div>
+  </div>
+</div>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="nav-logo">LSV</div>
+  <a href="#about">Über mich</a>
+  <a href="#why">Warum Leader</a>
+  <a href="#vorschlaege">Vorschläge</a>
+  <a href="#qualitaeten">Qualitäten</a>
+  <a href="#konzept">Konzept</a>
+  <a href="#beitritt">Beitritt</a>
+  <a href="#leitfaden">Leitfaden</a>
+</nav>
+
+<div class="pg">
+
+<!-- 01 -->
+<div class="sec" id="about">
+  <div class="sh">
+    <span class="sh-num">01</span>
+    <h2 class="sh-title">Informationen</h2>
+    <div class="sh-rule"></div>
+  </div>
+  <div class="profil">
+    <div class="pi"><div class="pi-k">OOC Name</div><div class="pi-v">Markus</div></div>
+    <div class="pi"><div class="pi-k">OOC Alter</div><div class="pi-v">16 Jahre</div></div>
+    <div class="pi"><div class="pi-k">Discord</div><div class="pi-v">Ryxma69</div></div>
+    <div class="pi"><div class="pi-k">IC Name</div><div class="pi-v">Simon Benko</div></div>
+    <div class="pi"><div class="pi-k">Spieler-ID</div><div class="pi-v">#279054</div></div>
+    <div class="pi"><div class="pi-k">Bewerbung für</div><div class="pi-v">El Patron (12)</div></div>
+  </div>
+</div>
+
+<!-- 02 -->
+<div class="sec" id="why">
+  <div class="sh">
+    <span class="sh-num">02</span>
+    <h2 class="sh-title">Warum ich Leader werden will</h2>
+    <div class="sh-rule"></div>
+  </div>
+  <div class="ft">
+    Die Los Santos Vagos liegt mir sehr am Herzen. Ich hab dort unter dem letzten Leader viel gelernt und seh mich jetzt bereit, selbst die Führung zu übernehmen. Mein Ziel ist es die Vagos nach vorne zu bringen, damit wir im Ghetto den Respekt kriegen den wir verdienen. Als Leader bring ich Ruhe, Respekt und Durchsetzungsvermögen mit — ich weiß wie man die richtigen Entscheidungen trifft. Zusammenhalt und Loyalität sind für mich keine Floskeln. Mit mir an der Leitung gibt's Wachstum, Stärke und Respekt. Ich steh hinter jedem einzelnen Member — gemeinsam schaffen wir alles, das ist mein Motto.
+  </div>
+</div>
+
+<!-- 03 -->
+<div class="sec" id="vorschlaege">
+  <div class="sh">
+    <span class="sh-num">03</span>
+    <h2 class="sh-title">Vorschläge zur RP-Verbesserung</h2>
+    <div class="sh-rule"></div>
+  </div>
+  <div class="blist">
+    <div class="bli">
+      <div class="bli-n">01</div>
+      <div class="bli-body">
+        <div class="bli-t">Staatsmacht werden</div>
+        <div class="bli-p">Langfristiges Ziel: die Vagos als mächtige und gefürchtete Kraft auf Grand RP etablieren.</div>
+      </div>
+    </div>
+    <div class="bli">
+      <div class="bli-n">02</div>
+      <div class="bli-body">
+        <div class="bli-t">Präsenz im Ghetto</div>
+        <div class="bli-p">Aktives Zinken, Sprayen, Schießereien — wir sollen täglich spürbar sein und niemand soll vergessen wessen Hood das ist.</div>
+      </div>
+    </div>
+    <div class="bli">
+      <div class="bli-n">03</div>
+      <div class="bli-body">
+        <div class="bli-t">Pflichtevents täglich</div>
+        <div class="bli-p">Jeden Tag werden die Pflichtevents durchgezogen — kein Ausreden, keine Ausnahmen.</div>
+      </div>
+    </div>
+    <div class="bli">
+      <div class="bli-n">04</div>
+      <div class="bli-body">
+        <div class="bli-t">Respektvoller Umgang mit anderen Orgas</div>
+        <div class="bli-p">Stärke zeigen bedeutet nicht jeden anfeinden — kluge Allianzen und respektvoller Umgang stärken unsere Position.</div>
+      </div>
+    </div>
+    <div class="bli">
+      <div class="bli-n">05</div>
+      <div class="bli-body">
+        <div class="bli-t">Aktives Turfen</div>
+        <div class="bli-p">Regelmäßiges und koordiniertes Turfen sichert unser Gebiet und zeigt Präsenz gegenüber anderen Gangs.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 04 -->
+<div class="sec" id="qualitaeten">
+  <div class="sh">
+    <span class="sh-num">04</span>
+    <h2 class="sh-title">Was mich als Leader auszeichnet</h2>
+    <div class="sh-rule"></div>
+  </div>
+  <div class="ft">
+    Was mich als Leader auszeichnet ist vor allem meine ruhige Art — Konflikte werden bei mir entspannt geklärt, nicht eskaliert. Während meiner Zeit auf DE01 hab ich viel Erfahrung als High Rank und als Turfer gesammelt, was mir in stressigen Situationen zugutekommt. Ich seh mich als jemanden der Menschen motivieren und den Zusammenhalt stärken kann — gemeinsam mit meinen Vizen und den anderen Membern will ich die Gang Schritt für Schritt weiterentwickeln.
+  </div>
+</div>
+
+<!-- 05 -->
+<div class="sec" id="konzept">
+  <div class="sh">
+    <span class="sh-num">05</span>
+    <h2 class="sh-title">Konzept der Organisation</h2>
+    <div class="sh-rule"></div>
+  </div>
+  <div class="rang-list">
+    <div class="rang-cat">Leaderschaft</div>
+    <div class="ri top"><div class="ri-n">12</div><div class="ri-body"><div class="ri-name">Patron (OG)</div><div class="ri-desc">Leader der Organisation</div></div></div>
+    <div class="ri top"><div class="ri-n">11</div><div class="ri-body"><div class="ri-name">Vize Patron</div><div class="ri-desc">Vize OG</div></div></div>
+    <div class="ri"><div class="ri-n">10</div><div class="ri-body"><div class="ri-name">El Capitan</div><div class="ri-desc">Rechte Hand der Leaderschaft</div></div></div>
+
+    <div class="rang-cat">Ausbilder</div>
+    <div class="ri"><div class="ri-n">09</div><div class="ri-body"><div class="ri-name">Instructor</div><div class="ri-desc">Ausbilder · Callt Events</div></div></div>
+
+    <div class="rang-cat">Turfer</div>
+    <div class="ri"><div class="ri-n">08</div><div class="ri-body"><div class="ri-name">Turf Leader</div><div class="ri-desc">Leitet das Turf Team</div></div></div>
+    <div class="ri"><div class="ri-n">07</div><div class="ri-body"><div class="ri-name">Turfer</div><div class="ri-desc">Zuständig für Turfgebiete</div></div></div>
+
+    <div class="rang-cat">Mitglieder</div>
+    <div class="ri"><div class="ri-n">06</div><div class="ri-body"><div class="ri-name">El Diablo</div><div class="ri-desc">Aktives Mitglied</div></div></div>
+    <div class="ri"><div class="ri-n">05</div><div class="ri-body"><div class="ri-name">Hermano</div><div class="ri-desc">Erfahrenes Gangmitglied</div></div></div>
+    <div class="ri"><div class="ri-n">04</div><div class="ri-body"><div class="ri-name">Miembro</div><div class="ri-desc">Vollwertiges Mitglied</div></div></div>
+    <div class="ri"><div class="ri-n">03</div><div class="ri-body"><div class="ri-name">El Amigo</div><div class="ri-desc">Hat sich bewiesen</div></div></div>
+    <div class="ri"><div class="ri-n">02</div><div class="ri-body"><div class="ri-name">Lil Amigo</div><div class="ri-desc">Neuling</div></div></div>
+
+    <div class="rang-cat">Strafrang</div>
+    <div class="ri rot"><div class="ri-n">01</div><div class="ri-body"><div class="ri-name">Servidor</div><div class="ri-desc">Sanktionsrang</div></div></div>
+  </div>
+</div>
+
+<!-- 06 -->
+<div class="sec" id="beitritt">
+  <div class="sh">
+    <span class="sh-num">06</span>
+    <h2 class="sh-title">Einladungskriterien</h2>
+    <div class="sh-rule"></div>
+  </div>
+  <div class="krit">
+    <div class="ki"><div class="ki-icon">01</div><div class="ki-txt">Mindest Visum 5</div></div>
+    <div class="ki"><div class="ki-icon">02</div><div class="ki-txt">Rucksack Level 2</div></div>
+    <div class="ki"><div class="ki-icon">03</div><div class="ki-txt">Kenntnis des Gang Regelwerks</div></div>
+    <div class="ki"><div class="ki-icon">04</div><div class="ki-txt">Geistige Reife</div></div>
+  </div>
+</div>
+
+<!-- 07 LEITFADEN -->
+<div class="sec" id="leitfaden">
+  <div class="sh">
+    <span class="sh-num">07</span>
+    <h2 class="sh-title">Ausbildungsleitfaden</h2>
+    <div class="sh-rule"></div>
+  </div>
+
+  <div class="lf-intro">
+    <p>Zuerst bittet ihr die Person um ihren Reisepass. Hat der Bewerber ein Visum unter 5 → wegschicken. Über 5 → Fragen stellen. Abnahme nur durch Rang 9 oder höher. Bewerber muss mind. <strong>80%</strong> richtig beantworten.</p>
+  </div>
+
+  <div class="qa-list" style="margin-top:2px;">
+
+    <div class="qa">
+      <div class="qa-q"><span class="qa-q-icon">F01</span>Nenne mir 4 offizielle Greenzones / 2–4 inoffizielle Greenzones.</div>
+      <div class="qa-a">
+        <strong>Offiziell:</strong> Strandmarkt, Staats-HQs, Anfänger-Jobs, Casino, Post usw.<br>
+        <strong>Inoffiziell:</strong> 24/7, Schwarzmarkt, Parkplätze, Geldautomaten usw.
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q"><span class="qa-q-icon">F02</span>Du wachst im MD auf — wie lange darfst du dich deinem Todesort nicht nähern?</div>
+      <div class="qa-a"><strong>15 Minuten.</strong></div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q"><span class="qa-q-icon">F03</span>Du wirst von der Polizei verfolgt oder hattest eine Schießerei im Ghetto — nach welcher Zeit darfst du das HQ wieder betreten?</div>
+      <div class="qa-a"><strong>5 Minuten.</strong></div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q"><span class="qa-q-icon">F04</span>Ein Gangmitglied liegt mit viel Bargeld und einer Heavy Sniper bewusstlos am Boden — du bist der Erste der es findet. Wie handelst du?</div>
+      <div class="qa-a"><strong>Aufheben oder Verstärkung rufen.</strong> Wichtig: <strong style="color:#c0392b;">NICHT Mercykillen!</strong></div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q"><span class="qa-q-icon">F05</span>Was ist beim Wiederbeleben zu beachten?</div>
+      <div class="qa-a"><strong style="color:#c0392b;">Nicht unter Beschuss wiederbeleben!</strong></div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q"><span class="qa-q-icon">F06</span>Wie lange musst du deine POV abrufbereit haben?</div>
+      <div class="qa-a">Jedes Mitglied muss seine POV für <strong>48 Stunden</strong> behalten.</div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q"><span class="qa-q-icon">F07</span>Welche Dinge sind im HQ verboten?</div>
+      <div class="qa-a">Gangmitglieder im HQ <strong>verletzen, töten oder ausrauben</strong> ist verboten.</div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q"><span class="qa-q-icon">F08</span>Was darf man beim FZ und BS nicht machen?</div>
+      <div class="qa-a">
+        <div class="fzbsGrid">
+          <div class="fzbsCard">
+            <h4>Fort Zancudo</h4>
+            <ul>
+              <li>LMG</li>
+              <li>Sniper</li>
+              <li>Tazer</li>
+              <li>Highground</li>
+            </ul>
+          </div>
+          <div class="fzbsCard">
+            <h4>Bankraub (BS)</h4>
+            <ul>
+              <li>LMG</li>
+              <li>Sniper</li>
+              <li>Tazer</li>
+              <li>Wasser vor Event Beginn betreten</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q"><span class="qa-q-icon">F09</span>Darf man in Handschellen den IC T-Funk (Gang Chat) nutzen?</div>
+      <div class="qa-a"><strong style="color:#c0392b;">Nein.</strong></div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q"><span class="qa-q-icon">F10</span>Wie reagiert man wenn man gezinkt wird?</div>
+      <div class="qa-a">
+        <strong>Kein PDA</strong> (kein Meetingpoint) · <strong>Kein Funk</strong> · <strong>Kein T-Chat</strong> · <strong>Kein CL</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pass-bar" style="margin-top:16px;">
+    <div class="pass-pct">80%</div>
+    <div>Bewerber müssen mindestens 80% der Fragen richtig beantworten. Wird das nicht erfüllt, wird die Person auf den nächsten Tag verwiesen und der Eintrag im Discord gemacht.</div>
+  </div>
+</div>
+
+</div><!-- /pg -->
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="ft-gang">Los Santos<br><span>Vagos</span></div>
+  </div>
+  <div class="ft-meta">
+    Bewerbung · Markus · Simon Benko<br>
+    ID #279054 · Discord Ryxma69<br>
+    Leitfaden · Marvin Benko · 2026
+  </div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})
+},{threshold:.06});
+document.querySelectorAll('.sec').forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
